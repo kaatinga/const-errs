@@ -1,6 +1,9 @@
 package const_errs
 
+// Error type
 type Error string
+
+// Warning type
 type Warning string
 
 // Error returns error description.
