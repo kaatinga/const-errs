@@ -12,3 +12,13 @@ func (err Error) Error() string {
 func (err Warning) Error() string {
 	return string(err)
 }
+
+// NewError creates a new error of Error type.
+func NewError(text string) Error {
+	return Error(text)
+}
+
+// NewError creates a new error of Warning type.
+func NewWarning(text string) Warning {
+	return Warning(text)
+}
