@@ -1,6 +1,8 @@
 package const_errs
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // ErrorWrapper type
 type ErrorWrapper struct {
@@ -22,4 +24,18 @@ func (err ErrorWrapper) Wrap(msg string) ErrorWrapper {
 		error:  err,
 		string: msg,
 	}
+}
+
+// Is reports whether any error in err's chain matches target.
+func (err ErrorWrapper) Is(wrappedErr error) bool {
+	if err.error != nil {
+		switch err.error.(type) {
+		case ErrorWrapper:
+			return err.error.(ErrorWrapper).Is(wrappedErr)
+		default:
+			return false
+		}
+	}
+
+	return false
 }
