@@ -29,6 +29,11 @@ func (err ErrorWrapper) Wrap(msg string) ErrorWrapper {
 // Is reports whether any error in err's chain matches target.
 func (err ErrorWrapper) Is(wrappedErr error) bool {
 	if err.error != nil {
+
+		if err.error == wrappedErr {
+			return true
+		}
+
 		switch err.error.(type) {
 		case ErrorWrapper:
 			return err.error.(ErrorWrapper).Is(wrappedErr)
