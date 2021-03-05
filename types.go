@@ -6,6 +6,9 @@ type Error string
 // Warning type
 type Warning string
 
+// Debug type
+type Debug string
+
 // Error returns error description.
 func (err Error) Error() string {
 	return string(err)
@@ -13,6 +16,11 @@ func (err Error) Error() string {
 
 // Error returns error description.
 func (err Warning) Error() string {
+	return string(err)
+}
+
+// Error returns error description.
+func (err Debug) Error() string {
 	return string(err)
 }
 
@@ -24,4 +32,9 @@ func NewError(text string) Error {
 // NewWarning creates a new error of Warning type.
 func NewWarning(text string) Warning {
 	return Warning(text)
+}
+
+// NewDebug creates a new error of Debug type.
+func NewDebug(text string) Debug {
+	return Debug(text)
 }
