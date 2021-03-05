@@ -20,7 +20,7 @@ type Debug string
 // Error returns error description.
 func (err ErrorWrapper) Error() string {
 	if err.error != nil {
-		return fmt.Sprintf("%s: %v", err.string, err.Error())
+		return fmt.Sprintf("%s: %v", err.string, err.error)
 	}
 	return err.string
 }
