@@ -1,7 +1,12 @@
 package const_errs
 
+import "fmt"
+
 // Error type
-type Error string
+type Error struct {
+	error
+	string
+}
 
 // Warning type
 type Warning string
@@ -11,7 +16,15 @@ type Debug string
 
 // Error returns error description.
 func (err Error) Error() string {
-	return string(err)
+	if err.error != nil {
+		return fmt.Sprintf("%s: %v", err.string, err)
+	}
+	return err.string
+}
+
+// WrapByError wraps the current error by another error.
+func (err Error) WrapByError(errWrapper Error) {
+	errWrapper.error = err
 }
 
 // Error returns error description.
@@ -24,9 +37,9 @@ func (err Debug) Error() string {
 	return string(err)
 }
 
-// NewError creates a new error of Error type.
-func NewError(text string) Error {
-	return Error(text)
+// NewError creates a new error of Error type that wraps an error optionally.
+func NewError(text string, err error) Error {
+	return Error{err, text}
 }
 
 // NewWarning creates a new error of Warning type.
