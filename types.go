@@ -21,7 +21,7 @@ func NewError(text string) Error {
 	return Error(text)
 }
 
-// NewError creates a new error of Warning type.
+// NewWarning creates a new error of Warning type.
 func NewWarning(text string) Warning {
 	return Warning(text)
 }
