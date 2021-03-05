@@ -50,7 +50,7 @@ func (err Debug) Error() string {
 
 // NewError creates a new error of Error type that wraps an error optionally.
 func NewError(text string, err error) Error {
-	return Error{err, text}
+	return Error(text)
 }
 
 // NewWarning creates a new error of Warning type.
