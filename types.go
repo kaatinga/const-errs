@@ -2,11 +2,14 @@ package const_errs
 
 import "fmt"
 
-// Error type
-type Error struct {
+// ErrorWrapper type
+type ErrorWrapper struct {
 	error
 	string
 }
+
+// Error type
+type Error string
 
 // Warning type
 type Warning string
@@ -15,16 +18,24 @@ type Warning string
 type Debug string
 
 // Error returns error description.
-func (err Error) Error() string {
+func (err ErrorWrapper) Error() string {
 	if err.error != nil {
 		return fmt.Sprintf("%s: %v", err.string, err)
 	}
 	return err.string
 }
 
-// WrapByError wraps the current error by another error.
-func (err Error) WrapByError(errWrapper Error) {
-	errWrapper.error = err
+// Wrap wraps the current error by another error.
+func (err Error) Wrap(msg string) ErrorWrapper {
+	return ErrorWrapper{
+		error:  err,
+		string: msg,
+	}
+}
+
+// Error returns error description.
+func (err Error) Error() string {
+	return string(err)
 }
 
 // Error returns error description.
