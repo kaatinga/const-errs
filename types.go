@@ -1,7 +1,5 @@
 package const_errs
 
-
-
 // Error type
 type Error string
 
