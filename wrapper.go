@@ -1,42 +1,38 @@
 package const_errs
 
-import (
-	"fmt"
-)
-
-// ErrorWrapper type
-type ErrorWrapper struct {
-	error
+// AnnotatedError type.
+type AnnotatedError struct {
+	cause error
 	string
 }
 
 // Error returns error description.
-func (err ErrorWrapper) Error() string {
-	if err.error != nil {
-		return fmt.Sprintf("%s: %v", err.string, err.error)
+func (err AnnotatedError) Error() string {
+	if err.cause != nil {
+		return err.string + ": " + err.cause.Error()
 	}
 	return err.string
 }
 
-// Wrap wraps the current error by another error.
-func (err ErrorWrapper) Wrap(msg string) ErrorWrapper {
-	return ErrorWrapper{
-		error:  err,
+// Annotate adds an additional description to go with an error.
+func (err AnnotatedError) Annotate(msg string) AnnotatedError {
+	return AnnotatedError{
+		cause:  err,
 		string: msg,
 	}
 }
 
 // Is reports whether any error in err's chain matches target.
-func (err ErrorWrapper) Is(wrappedErr error) bool {
-	if err.error != nil {
+func (err AnnotatedError) Is(wrappedErr error) bool {
+	if err.cause != nil {
 
-		if err.error == wrappedErr {
+		if err.cause == wrappedErr {
 			return true
 		}
 
-		switch err.error.(type) {
-		case ErrorWrapper:
-			return err.error.(ErrorWrapper).Is(wrappedErr)
+		switch err.cause.(type) {
+		case AnnotatedError:
+			return err.cause.(AnnotatedError).Is(wrappedErr)
 		default:
 			return false
 		}
@@ -44,3 +40,6 @@ func (err ErrorWrapper) Is(wrappedErr error) bool {
 
 	return false
 }
+
+func (err *AnnotatedError) Cause() error  { return err.cause }
+func (err *AnnotatedError) Unwrap() error { return err.cause }
