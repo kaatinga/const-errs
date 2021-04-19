@@ -1,18 +1,18 @@
 package const_errs
 
-// Error type
+// Error type.
 type Error string
 
-// Warning type
+// Warning type.
 type Warning string
 
-// Debug type
+// Debug type.
 type Debug string
 
-// Wrap wraps the current error by another error.
-func (err Error) Wrap(msg string) ErrorWrapper {
-	return ErrorWrapper{
-		error:  err,
+// Annotate adds an additional description to go with an error.
+func (err Error) Annotate(msg string) AnnotatedError {
+	return AnnotatedError{
+		cause:  err,
 		string: msg,
 	}
 }
@@ -46,3 +46,6 @@ func NewWarning(text string) Warning {
 func NewDebug(text string) Debug {
 	return Debug(text)
 }
+
+func (err *Error) Cause() error  { return err }
+func (err *Error) Unwrap() error { return err }
