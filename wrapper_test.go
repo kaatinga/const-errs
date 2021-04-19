@@ -1,27 +1,31 @@
 package const_errs
 
-import "testing"
+import (
+	"testing"
+)
 
 const err1 Error = "text1"
-const err2 Error = "text2"
 
 func TestErrorWrapper_Is(t *testing.T) {
 
 	tests := []struct {
 		name   string
-		fields ErrorWrapper
+		fields AnnotatedError
 		err    error
 		want   bool
 	}{
-		{"ok", ErrorWrapper{
-			error:  err1,
-			string: "text",
+		{"ok", AnnotatedError{
+			cause:  AnnotatedError{
+				cause:  err1,
+				string: "text 1",
+			},
+			string: "text 2",
 		}, err1, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			err := ErrorWrapper{
-				error:  tt.fields.error,
+			err := AnnotatedError{
+				cause:  tt.fields.cause,
 				string: tt.fields.string,
 			}
 			if got := err.Is(tt.err); got != tt.want {
