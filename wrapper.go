@@ -9,7 +9,7 @@ type AnnotatedError struct {
 // Error returns error description.
 func (err AnnotatedError) Error() string {
 	if err.cause != nil {
-		return err.string + ": " + err.cause.Error()
+		return err.cause.Error() + ": " + err.string
 	}
 	return err.string
 }
