@@ -46,5 +46,5 @@ func (err AnnotatedError) Is(wrappedErr error) bool {
 	return false
 }
 
-func (err *AnnotatedError) Cause() error  { return err.cause }
-func (err *AnnotatedError) Unwrap() error { return err.cause }
+func (err AnnotatedError) Cause() error  { return err.cause }
+func (err AnnotatedError) Unwrap() error { return err.cause }
