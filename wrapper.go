@@ -22,6 +22,11 @@ func (err AnnotatedError) Annotate(msg string) AnnotatedError {
 	}
 }
 
+// Annotation returns the additional description that goes with error.
+func (err AnnotatedError) Annotation() string {
+	return err.string
+}
+
 // Is reports whether any error in err's chain matches target.
 func (err AnnotatedError) Is(wrappedErr error) bool {
 	if err.cause != nil {
