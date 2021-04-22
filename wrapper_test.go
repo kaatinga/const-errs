@@ -1,8 +1,6 @@
 package const_errs
 
-import (
-	"testing"
-)
+import "testing"
 
 const err1 Error = "text1"
 
@@ -15,7 +13,7 @@ func TestErrorWrapper_Is(t *testing.T) {
 		want   bool
 	}{
 		{"ok", AnnotatedError{
-			cause:  AnnotatedError{
+			cause: AnnotatedError{
 				cause:  err1,
 				string: "text 1",
 			},
