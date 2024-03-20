@@ -8,3 +8,4 @@
 # const-errs
 
 This is a production ready custom errors package.
+[![Tests](https://github.com/kaatinga/luna/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kaatinga/luna/actions/workflows/test.yml)
