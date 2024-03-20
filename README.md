@@ -1,4 +1,4 @@
-[![Tests](https://github.com/kaatinga/luna/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kaatinga/luna/actions/workflows/test.yml)
+[![Tests](https://github.com/kaatinga/const-errs/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kaatinga/const-errs/actions/workflows/test.yml)
 [![GitHub release](https://img.shields.io/github/release/kaatinga/const-errs.svg)](https://github.com/kaatinga/const-errs/releases)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/kaatinga/const-errs/blob/main/LICENSE)
 [![codecov](https://codecov.io/gh/kaatinga/const-errs/branch/main/graph/badge.svg)](https://codecov.io/gh/kaatinga/const-errs)
